@@ -1,0 +1,11 @@
+# Exclude all TypeScript files and build info
+*.ts
+tsconfig.json
+tsconfig.tsbuildinfo
+
+# Exclude test files and project directory
+src/test/
+
+# Exclude development/config files
+.vscode/
+launch.json

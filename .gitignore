@@ -1,0 +1,9 @@
+node_modules/
+dist/
+*.ts
+tsconfig.tsbuildinfo
+.vscode/
+launch.json
+dist/*.map
+*.log
+.DS_Store
