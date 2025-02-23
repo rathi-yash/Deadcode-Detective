@@ -129,7 +129,9 @@ Check issues for ideas or report bugs.
 ---
 ## License
 
-MIT © Yash
+This project is licensed under the **MIT License** © [Yash](https://github.com/rathi-yash).  
+
+See the [LICENSE](./LICENSE) file for more details.
 
 ---
 ## Spread the Word
