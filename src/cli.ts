@@ -1,9 +1,10 @@
 #!/usr/bin/env node
+
 import { program } from 'commander';
 import chalk from 'chalk';
 import ora from 'ora';
-import { detectJS } from './detectors/js.js'; // Remove .ts
-import { detectPython } from './detectors/python.js'; // Remove .ts
+import { detectJS } from './detectors/js.js';
+import { detectPython } from './detectors/python.js';
 import { printResults, DeadCodeItem } from './utils.js';
 
 program
@@ -15,6 +16,7 @@ program
   .command('detect')
   .option('--js <path>', 'Scan JavaScript/TypeScript files')
   .option('--py <path>', 'Scan Python files')
+  .option('--confidence <number>', 'Confidence threshold for Python dead code detection (0-100, default: 60)', '60')
   .action(async (options) => {
     const spinner = ora('Scanning for dead code...').start();
     const results: { js?: DeadCodeItem[]; py?: DeadCodeItem[] } = {};
@@ -26,7 +28,8 @@ program
       }
       if (options.py) {
         spinner.text = 'Scanning Python files...';
-        results.py = await detectPython(options.py);
+        const confidence = parseInt(options.confidence, 10);
+        results.py = await detectPython(options.py, confidence);
       }
       spinner.succeed('Scan completed successfully');
       printResults(results);
@@ -36,5 +39,5 @@ program
       process.exit(1);
     }
   });
-
+  
 program.parse();
