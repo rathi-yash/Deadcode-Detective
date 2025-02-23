@@ -5,7 +5,9 @@ tsconfig.tsbuildinfo
 
 # Exclude test files and project directory
 src/test/
+test/
 
 # Exclude development/config files
 .vscode/
+.idea/
 launch.json
