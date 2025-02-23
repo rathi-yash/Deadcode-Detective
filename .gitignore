@@ -1,6 +1,5 @@
 node_modules/
 dist/
-*.ts
 tsconfig.tsbuildinfo
 .vscode/
 launch.json
