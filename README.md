@@ -46,7 +46,7 @@ pip install vulture
 
 Run the `detect` command with paths to scan:
 ```bash
-deadcode-detective detect --js ./path/to/js --py ./path/to/python
+deadcode-detective detect --py ./src/test/python --confidence 70
 ```
 
 ### **Options**
@@ -74,6 +74,12 @@ If no dead code is found, you’ll see:
 ```bash
 ✅ No dead code found!
 ```
+---
+
+## Limitations
+
+For JavaScript projects without a tsconfig.json, Deadcode Detective provides limited detection using ts-prune. Use TypeScript or ES6 modules for full JavaScript support, or look for future updates with enhanced JS analysis.
+
 ---
 
 ## Try It Out
