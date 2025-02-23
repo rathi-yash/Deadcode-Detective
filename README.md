@@ -6,7 +6,7 @@ Deadcode Detective is a sleek CLI tool that sniffs out unused code—those forgo
 
 [![npm version](https://badge.fury.io/js/deadcode-detective.svg)](https://www.npmjs.com/package/deadcode-detective)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-![GitHub stars](https://img.shields.io/github/stars/yash9/deadcode-detective.svg?style=social)
+![GitHub stars](https://img.shields.io/github/stars/rathi-yash/deadcode-detective.svg?style=social)
 
 ---
 
@@ -26,16 +26,19 @@ Grab it from npm:
 
 ```bash
 npm install -g deadcode-detective
+```
 
 ### **Prerequisites**
 - **JavaScript/TypeScript**: Install `ts-prune`:
 
 ```bash
 npm install -g ts-prune
+```
 
 - **Python**: Install `vulture`:
 ```bash
 pip install vulture
+```
 
 ---
 
@@ -44,7 +47,7 @@ pip install vulture
 Run the `detect` command with paths to scan:
 ```bash
 deadcode-detective detect --js ./path/to/js --py ./path/to/python
-
+```
 
 ### **Options**
 - `--js <path>`: Scan JavaScript/TypeScript files.
@@ -65,12 +68,12 @@ dateFormatter.ts:
 ❗ Found 1 unused item in Python:
 script.py:
   - dead_function (line 5)
-
+```
 
 If no dead code is found, you’ll see:
 ```bash
 ✅ No dead code found!
-
+```
 ---
 
 ## Try It Out
@@ -82,7 +85,7 @@ cd deadcode-detective
 npm install
 npm run build
 node dist/cli.js detect --js ./src/test/js --py ./src/test/python
-
+```
 The `src/test/` folder contains sample JS and Python files with dead code to play with.
 
 ---
@@ -108,13 +111,11 @@ Love it? Hate it? Want to make it better? Contributions are welcome!
 Check issues for ideas or report bugs.
 
 ---
-
 ## License
 
 MIT © Yash
 
 ---
-
 ## Spread the Word
 
 Found this useful? Give it a ⭐ on GitHub or share it with your crew. Let’s banish dead code together!

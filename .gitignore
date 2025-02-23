@@ -7,3 +7,4 @@ launch.json
 dist/*.map
 *.log
 .DS_Store
+.idea
