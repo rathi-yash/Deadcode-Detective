@@ -5,7 +5,8 @@ import chalk from 'chalk';
 import ora from 'ora';
 import { detectJS } from './detectors/js.js';
 import { detectPython } from './detectors/python.js';
-import { generateOutput, DeadCodeItem } from './utils.js';
+import { generateOutput } from './utils.js';
+import { DeadCodeItem } from './types.js';
 
 program
   .name('deadcode-detective')

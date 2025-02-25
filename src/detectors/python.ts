@@ -1,5 +1,5 @@
 import { execSync } from 'child_process';
-import { DeadCodeItem } from '../utils';
+import { DeadCodeItem } from '../types.js';
 import chalk from 'chalk';
 
 export async function detectPython(path: string, confidence?: number): Promise<DeadCodeItem[]> {
@@ -18,7 +18,6 @@ export async function detectPython(path: string, confidence?: number): Promise<D
       }
     }
 
-    // Use validated or default confidence (60)
     const minConfidence = Math.max(0, Math.min(100, confidence || 60));
     const output = execSync(`vulture ${path} --min-confidence ${minConfidence}`, { encoding: 'utf-8' });
     return parseVultureOutput(output);
@@ -49,9 +48,9 @@ function parseVultureOutput(output: string): DeadCodeItem[] {
       return {
         file,
         symbol,
-        type, // Optional, matching DeadCodeItem's type?: string
+        type, 
         line: parseInt(lineNumber) || 0,
-        confidence, // Optional, matching DeadCodeItem's confidence?: number
+        confidence, 
       } as DeadCodeItem;
     })
     .filter((item): item is DeadCodeItem => item !== null);

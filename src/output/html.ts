@@ -1,6 +1,7 @@
 import { writeFileSync } from 'fs';
 import chalk from 'chalk';
-import { DeadCodeItem, groupAndSortByFile } from '../utils';
+import { groupAndSortByFile } from '../utils.js';
+import { DeadCodeItem } from '../types.js';
 
 function getTabScript(): string {
   return `
@@ -172,7 +173,7 @@ export async function generateHtmlOutput(results: { js?: DeadCodeItem[]; py?: De
                     <tr>
                       <td class="${item.symbol === 'No dead code found!' ? 'clean' : 'dead'}">❗ ${item.symbol}</td>
                       <td>${item.line}</td>
-                      <td>JS</td>
+                      <td>${item.language || 'JS'}</td> 
                     </tr>
                   `).join('')}
                 </table>

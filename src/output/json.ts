@@ -1,6 +1,6 @@
-import { DeadCodeItem } from "../utils";
-import { writeFileSync } from "fs";
-import chalk from "chalk";
+import { writeFileSync } from 'fs';
+import chalk from 'chalk';
+import { DeadCodeItem } from '../types.js';
 
 export async function generateJsonOutput(results: { js?: DeadCodeItem[]; py?: DeadCodeItem[] }, outputPath?: string): Promise<void> {
   const totalDeadCode = (results.js?.length || 0) + (results.py?.length || 0);

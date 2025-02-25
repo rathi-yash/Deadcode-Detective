@@ -1,7 +1,7 @@
 import { execSync } from 'child_process';
 import { resolve } from 'path';
 import { existsSync } from 'fs';
-import { DeadCodeItem } from '../utils';
+import { DeadCodeItem } from '../types.js';
 
 export async function detectJS(path: string): Promise<DeadCodeItem[]> {
   console.log('Make sure `ts-prune` is installed (`npm install -g ts-prune`)');
@@ -32,11 +32,19 @@ function parseTSPruneOutput(output: string, basePath: string): DeadCodeItem[] {
       const match = line.match(/^(.+):(\d+)\s+-\s+(.+)$/);
       if (match) {
         const [, file, lineNumber, symbol] = match;
-        const normalizedFile = file.replace(/\\/g, '/').replace(/^\/+/, ''); 
-        const absoluteFile = resolve(normalizedFile).replace(/\\/g, '/'); 
+        const normalizedFile = file.replace(/\\/g, '/').replace(/^\/+/, '');
+        const absoluteFile = resolve(normalizedFile).replace(/\\/g, '/');
         if (absoluteFile.startsWith(normalizedBasePath)) {
-          const relativeFile = absoluteFile.substring(normalizedBasePath.length + 1); 
-          return { file: relativeFile, symbol: symbol.trim(), line: parseInt(lineNumber) || 0 };
+          const relativeFile = absoluteFile.substring(normalizedBasePath.length + 1);
+          
+          // Determine language based on file extension
+          let language: string;
+          if (relativeFile.endsWith('.ts')) {
+            language = 'TS';
+          } else {
+            language = 'JS';
+          }
+          return { file: relativeFile, symbol: symbol.trim(), line: parseInt(lineNumber) || 0, language } as DeadCodeItem;
         }
       }
       return null;
