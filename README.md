@@ -138,6 +138,8 @@ See the [LICENSE](./LICENSE) file for more details.
 ---
 ## Spread the Word
 
-Found this useful? Give it a ⭐ on GitHub or share it with your crew. Let’s banish dead code together!
+Found this useful? Give it a ⭐ on GitHub or share it with your crew. Let’s banish dead code together! If you’d like to support my work, consider buying me a coffee—every sip fuels more coding!
+
+<a href="https://www.buymeacoffee.com/yash.rathi" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/default-orange.png" alt="Buy Me A Coffee" height="41" width="174"></a>
 
 Questions? Hit me up in the issues
