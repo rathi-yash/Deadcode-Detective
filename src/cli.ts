@@ -10,7 +10,7 @@ import { printResults, DeadCodeItem } from './utils.js';
 program
   .name('deadcode-detective')
   .description('Detect dead code in JavaScript/TypeScript and Python projects')
-  .version('1.0.2');
+  .version('1.0.3');
 
 program
   .command('detect')
