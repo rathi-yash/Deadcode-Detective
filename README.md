@@ -106,20 +106,32 @@ The `src/test/` folder contains sample JS and Python files with dead code to pla
 
 ## Contributing
 
-Love it? Hate it? Want to make it better? Contributions are welcome!
+Love it? Hate it? Want to make it better? **Contributions are welcome!** 🚀  
 
-1. Fork the repo.
-2. Create a branch: git checkout -b my-feature
-3. Commit changes: git commit -m "Add cool thing".
-4. Push: git push origin my-feature.
-5. Open a PR!
+### Steps to Contribute:
+1. **Fork the repository**.
+2. **Create a new branch**:  
+   ```sh
+   git checkout -b my-feature;
+   ```
+3. Commit changes:
+   ```sh
+   git commit -m "Add cool thing".
+   ```
+6. Push:
+   ```sh
+   git push origin my-feature.
+   ```
+8. Open a PR!
 
 Check issues for ideas or report bugs.
 
 ---
 ## License
 
-MIT © Yash
+This project is licensed under the **MIT License** © [Yash](https://github.com/rathi-yash).  
+
+See the [LICENSE](./LICENSE) file for more details.
 
 ---
 ## Spread the Word
