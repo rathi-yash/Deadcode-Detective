@@ -12,10 +12,10 @@ Deadcode Detective is a sleek CLI tool that sniffs out unused code—those forgo
 
 ## Why Use It?
 
-Dead code slows you down—clogging reviews, bloating builds, and hiding bugs. Deadcode Detective makes cleanup a breeze:
-- **Multi-Language**: Detects dead code in JavaScript, TypeScript, and Python.
-- **Fast & Simple**: Scans your project in seconds with minimal setup.
-- **Pretty Output**: Color-coded reports that are easy on the eyes.
+Dead code is a silent killer—slowing reviews, bloating builds, and hiding bugs. I’ve been there, untangling large codebases where cleanup was a nightmare. Deadcode Detective fixes that:
+- **Multi-Language**: Targets JavaScript, TypeScript, and Python in one tool.
+- **Fast & Unified**: Scans in seconds, blending `ts-prune` and `vulture` into a single, polished CLI.
+- **Pretty Reports**: Color-coded output that’s easy to read and act on. (Coming Soon)
 - **Actionable**: Pinpoints files, lines, and symbols to zap.
 
 ---
@@ -52,6 +52,7 @@ deadcode-detective detect --py ./src/test/python --confidence 70
 ### **Options**
 - `--js <path>`: Scan JavaScript/TypeScript files.
 - `--py <path>`: Scan Python files.
+- `--confidence <number>`: Set Python detection threshold (default: 60). Higher values reduce false positives.
 
 ---
 
@@ -78,7 +79,7 @@ If no dead code is found, you’ll see:
 
 ## Limitations
 
-For JavaScript projects without a tsconfig.json, Deadcode Detective provides limited detection using ts-prune. Use TypeScript or ES6 modules for full JavaScript support, or look for future updates with enhanced JS analysis.
+For JavaScript, a `tsconfig.json` is required for full accuracy. Plain JS support is limited but on the roadmap—stay tuned!
 
 ---
 
@@ -102,6 +103,7 @@ The `src/test/` folder contains sample JS and Python files with dead code to pla
 - **Python**: Leverages `vulture` with a 60% confidence threshold for reliable detection.
 - **Magic**: A dash of TypeScript, commander, chalk, and ora for a smooth CLI experience.
 
+**Coming Soon**: CI/CD integration, JSON/HTML reports, and more!
 ---
 
 ## Contributing
