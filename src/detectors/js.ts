@@ -24,7 +24,7 @@ export async function detectJS(path: string): Promise<DeadCodeItem[]> {
 }
 
 function parseTSPruneOutput(output: string, basePath: string): DeadCodeItem[] {
-  const normalizedBasePath = resolve(basePath).replace(/\\/g, '/'); // Absolute path: 'C:/Users/yash9/.../src/test-project/js'
+  const normalizedBasePath = resolve(basePath).replace(/\\/g, '/');
   return output
     .split('\n')
     .filter(line => line.trim() && !line.startsWith('Found'))
@@ -32,10 +32,10 @@ function parseTSPruneOutput(output: string, basePath: string): DeadCodeItem[] {
       const match = line.match(/^(.+):(\d+)\s+-\s+(.+)$/);
       if (match) {
         const [, file, lineNumber, symbol] = match;
-        const normalizedFile = file.replace(/\\/g, '/').replace(/^\/+/, ''); // '/src/test-project/js/unused.js' -> 'src/test-project/js/unused.js'
-        const absoluteFile = resolve(normalizedFile).replace(/\\/g, '/'); // Absolute path of file
+        const normalizedFile = file.replace(/\\/g, '/').replace(/^\/+/, ''); 
+        const absoluteFile = resolve(normalizedFile).replace(/\\/g, '/'); 
         if (absoluteFile.startsWith(normalizedBasePath)) {
-          const relativeFile = absoluteFile.substring(normalizedBasePath.length + 1); // 'unused.js'
+          const relativeFile = absoluteFile.substring(normalizedBasePath.length + 1); 
           return { file: relativeFile, symbol: symbol.trim(), line: parseInt(lineNumber) || 0 };
         }
       }
