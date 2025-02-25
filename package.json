@@ -1,6 +1,6 @@
 {
   "name": "deadcode-detective",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "A tool to detect dead code in JavaScript/TypeScript and Python projects",
   "main": "dist/cli.js",
   "bin": {
