@@ -8,17 +8,15 @@ Deadcode Detective is a sleek CLI tool that sniffs out unused code—those forgo
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 ![GitHub stars](https://img.shields.io/github/stars/rathi-yash/deadcode-detective.svg?style=social)
 
----
 
 ## Why Use It?
 
-Dead code slows you down—clogging reviews, bloating builds, and hiding bugs. Deadcode Detective makes cleanup a breeze:
-- **Multi-Language**: Detects dead code in JavaScript, TypeScript, and Python.
-- **Fast & Simple**: Scans your project in seconds with minimal setup.
-- **Pretty Output**: Color-coded reports that are easy on the eyes.
+Dead code is a silent killer—slowing reviews, bloating builds, and hiding bugs. I’ve been there, untangling large codebases where cleanup was a nightmare. Deadcode Detective fixes that:
+- **Multi-Language**: Targets JavaScript, TypeScript, and Python in one tool.
+- **Fast & Unified**: Scans in seconds, blending `ts-prune` and `vulture` into a single, polished CLI.
+- **Pretty Reports**: Color-coded output that’s easy to read and act on. (Coming Soon)
 - **Actionable**: Pinpoints files, lines, and symbols to zap.
 
----
 
 ## Installation
 
@@ -40,7 +38,6 @@ npm install -g ts-prune
 pip install vulture
 ```
 
----
 
 ## Usage
 
@@ -52,10 +49,62 @@ deadcode-detective detect --py ./src/test/python --confidence 70
 ### **Options**
 - `--js <path>`: Scan JavaScript/TypeScript files.
 - `--py <path>`: Scan Python files.
+- `--confidence <number>`: Confidence threshold for Python dead code detection (0-100, default: 60). Throws an error if above 100 or below 0.
+- `--format <type>`: Output format (cli, html, json, default: cli). Use html for web reports, json for machine-readable output, or cli for terminal output.
+- `--output <file>`: Output file path (for html or json, defaults to console for json, file 'deadcode-report.<format>' for html).
 
----
+## Advance Usage with Formats
 
-## Example Output
+Generate rich, shareable reports using `--format` and `--output`:
+```bash
+# HTML report (web view)
+deadcode-detective detect --js ./src/test --py ./src/test/python --format html --output report.html
+
+# JSON report (machine-readable)
+deadcode-detective detect --js ./src/test --py ./src/test/python --format json --output report.json
+```
+
+## Report Example Outputs
+
+### HTML Report Preview
+The HTML report offers a visually appealing, interactive view with tabs for different languages and collapsible sections for files. Here’s a sample:
+
+![image](assests/html_report.png) ![image](assests/html_report_python.png)
+
+
+Click [here](report.html) to view the HTML report.
+
+### JSON Report Preview
+The JSON report provides a structured, machine-readable format for automation or CI/CD integration. Here’s an excerpt:
+
+```json
+{
+  "js": [
+    { 
+      "file": "src/test/js/unused.js", 
+      "symbol": "unusedFunction", 
+      "line": 2, 
+      "language": "JS" }
+  ],
+  "py": [
+    { 
+      "file": "src/test/python/unused.py", 
+      "symbol": "unused_function", 
+      "line": 1, 
+      "language": "Python", 
+      "confidence": 60 }
+  ],
+  "summary": { 
+    "totalDeadCode": 2, 
+    "timestamp": "Sun, 23 Feb 2025 18:15:28 UTC" 
+    }
+}
+```
+Click [here](report.json) to view the JSON report.
+
+### CLI
+Below is the CLI structure which gets printed if no format is selected.
+
 ```bash
 🔎 Dead Code Report:
 
@@ -74,13 +123,10 @@ If no dead code is found, you’ll see:
 ```bash
 ✅ No dead code found!
 ```
----
 
 ## Limitations
 
-For JavaScript projects without a tsconfig.json, Deadcode Detective provides limited detection using ts-prune. Use TypeScript or ES6 modules for full JavaScript support, or look for future updates with enhanced JS analysis.
-
----
+For JavaScript, a `tsconfig.json` is required for full accuracy. Plain JS support is limited but on the roadmap—stay tuned!
 
 ## Try It Out
 
@@ -94,7 +140,6 @@ node dist/cli.js detect --js ./src/test/js --py ./src/test/python
 ```
 The `src/test/` folder contains sample JS and Python files with dead code to play with.
 
----
 
 ## How It Works
 
@@ -102,7 +147,7 @@ The `src/test/` folder contains sample JS and Python files with dead code to pla
 - **Python**: Leverages `vulture` with a 60% confidence threshold for reliable detection.
 - **Magic**: A dash of TypeScript, commander, chalk, and ora for a smooth CLI experience.
 
----
+**Coming Soon**: CI/CD integration, JSON/HTML reports, and more!
 
 ## Contributing
 
@@ -126,16 +171,16 @@ Love it? Hate it? Want to make it better? **Contributions are welcome!** 🚀
 
 Check issues for ideas or report bugs.
 
----
 ## License
 
 This project is licensed under the **MIT License** © [Yash](https://github.com/rathi-yash).  
 
 See the [LICENSE](./LICENSE) file for more details.
 
----
 ## Spread the Word
 
-Found this useful? Give it a ⭐ on GitHub or share it with your crew. Let’s banish dead code together!
+Found this useful? Give it a ⭐ on GitHub or share it with your crew. Let’s banish dead code together! If you’d like to support my work, consider buying me a coffee—every sip fuels more coding!
+
+<a href="https://www.buymeacoffee.com/yash.rathi" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/default-orange.png" alt="Buy Me A Coffee" height="41" width="174"></a>
 
 Questions? Hit me up in the issues
