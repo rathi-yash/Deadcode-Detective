@@ -149,6 +149,7 @@ The `src/test/` folder contains sample JS and Python files with dead code to pla
 
 **Coming Soon**: CI/CD integration, JSON/HTML reports, and more!
 
+
 ## Contributing
 
 Love it? Hate it? Want to make it better? **Contributions are welcome!** 🚀  
