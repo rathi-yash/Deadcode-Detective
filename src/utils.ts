@@ -1,14 +1,7 @@
 import chalk from 'chalk';
-import { generateHtmlOutput } from './output/html';
-import { generateJsonOutput } from './output/json';
-
-export interface DeadCodeItem {
-  file: string;
-  symbol: string;
-  line: number;
-  type?: string; 
-  confidence?: number; 
-}
+import { generateHtmlOutput } from './output/html.js';
+import { generateJsonOutput } from './output/json.js';
+import { DeadCodeItem } from './types.js';
 
 function printCliResults(results: { js?: DeadCodeItem[]; py?: DeadCodeItem[] }) {
   console.log(chalk.bold('\n🔎 Dead Code Report:'));
@@ -18,7 +11,7 @@ function printCliResults(results: { js?: DeadCodeItem[]; py?: DeadCodeItem[] }) 
     const grouped = groupAndSortByFile(results.js);
     for (const [file, items] of Object.entries(grouped)) {
       console.log(chalk.cyan(`\n${file}:`));
-      items.forEach(item => console.log(`  - ${chalk.yellow(item.symbol)} (line ${item.line})`));
+      items.forEach(item => console.log(`  - ${chalk.yellow(item.symbol)} (line ${item.line}) (${item.language || 'JS'})`));
     }
   }
 
@@ -27,7 +20,7 @@ function printCliResults(results: { js?: DeadCodeItem[]; py?: DeadCodeItem[] }) 
     const grouped = groupAndSortByFile(results.py);
     for (const [file, items] of Object.entries(grouped)) {
       console.log(chalk.cyan(`\n${file}:`));
-      items.forEach(item => console.log(`  - ${chalk.yellow(item.symbol)} (line ${item.line})${item.confidence ? ` (confidence: ${item.confidence}%)` : ''}`));
+      items.forEach(item => console.log(`  - ${chalk.yellow(item.symbol)} (line ${item.line})${item.confidence ? ` (confidence: ${item.confidence}%)` : ''} (${item.language || 'Python'})`));
     }
   }
 
