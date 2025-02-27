@@ -1,0 +1,224 @@
+
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Deadcode Detective Report</title>
+      <style>
+        body {
+          font-family: Arial, Helvetica, sans-serif;
+          background-color: #f0f0f0;
+          color: #333333;
+          margin: 30px;
+          padding: 15px;
+          line-height: 1.8;
+        }
+        h1 {
+          color: #3498db;
+          font-size: 20px;
+          text-align: center;
+          margin-bottom: 20px;
+          font-weight: bold;
+        }
+        p {
+          font-size: 16px;
+          margin: 10px 0;
+          text-align: center;
+          background-color: rgba(230, 243, 255, 0.05);
+          padding: 10px;
+          border-radius: 4px;
+        }
+        .clean { color: #2ecc71; }
+        .dead { color: #e74c3c; }
+        table {
+          border-collapse: collapse;
+          width: 100%;
+          margin: 20px 0;
+          border-radius: 6px;
+          box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        th, td {
+          border: 1px solid #d3d3d3;
+          padding: 15px;
+          text-align: left;
+          font-size: 16px;
+        }
+        th {
+          background-color: #3498db;
+          color: white;
+          font-weight: bold;
+        }
+        tr:nth-child(even) { background-color: #ffffff; }
+        tr:nth-child(odd) { background-color: #f7f7f7; }
+        tr:hover { background-color: #e8e8e8; }
+        a {
+          color: #3498db;
+          text-decoration: none;
+        }
+        a:hover {
+          color: #5dade2;
+          text-decoration: underline;
+        }
+        .footer {
+          text-align: center;
+          color: #666666;
+          font-size: 12px;
+          margin-top: 20px;
+        }
+        .tabs {
+          display: flex;
+          margin-bottom: 20px;
+        }
+        .tab-button {
+          flex: 1;
+          padding: 10px;
+          background-color: #f7f7f7;
+          border: none;
+          border-radius: 4px 4px 0 0;
+          cursor: pointer;
+          font-family: Arial, Helvetica, sans-serif;
+          font-size: 16px;
+          color: #3498db;
+          margin-right: 5px;
+          transition: background-color 0.3s;
+        }
+        .tab-button.active {
+          background-color: #3498db;
+          color: white;
+        }
+        .tab-button:hover:not(.active) {
+          background-color: #e8e8e8;
+        }
+        .tab-content {
+          display: none;
+          padding: 10px;
+        }
+        .tab-content.active {
+          display: block;
+        }
+        details {
+          margin-bottom: 10px;
+        }
+        summary {
+          cursor: pointer;
+          padding: 10px;
+          background-color: #f7f7f7;
+          border-radius: 4px;
+          font-weight: bold;
+          color: #3498db;
+        }
+        summary:hover {
+          background-color: #e8e8e8;
+        }
+        @media (max-width: 768px) {
+          .tabs { flex-direction: column; }
+          .tab-button { margin-right: 0; margin-bottom: 5px; border-radius: 4px; }
+        }
+      </style>
+      <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const tabs = document.querySelectorAll('.tab-button');
+      const contents = document.querySelectorAll('.tab-content');
+
+      tabs.forEach(tab => {
+        tab.addEventListener('click', (e) => {
+          e.preventDefault();
+          tabs.forEach(t => t.classList.remove('active'));
+          contents.forEach(c => c.classList.remove('active'));
+          tab.classList.add('active');
+          document.querySelector(`#${tab.getAttribute('data-tab')}`).classList.add('active');
+        });
+      });
+
+      if (tabs.length > 0) {
+        tabs[0].classList.add('active');
+        document.querySelector(`#${tabs[0].getAttribute('data-tab')}`).classList.add('active');
+      }
+    });
+  </script>
+    </head>
+    <body>
+      <h1>Deadcode Detective Report</h1>
+      <p><strong>Total Dead Code: 6</strong></p>
+      
+        
+          <div class="tabs">
+            <button class="tab-button active" data-tab="js-tab">JavaScript/TypeScript</button>
+            <button class="tab-button" data-tab="py-tab">Python</button>
+          </div>
+          <div id="js-tab" class="tab-content active">
+            
+              <details open>
+                <summary>js/dateFormatter.ts (3 items)</summary>
+                <table>
+                  <tr><th>Symbol</th><th>Line</th><th>Language</th></tr>
+                  
+                    <tr>
+                      <td class="dead">❗ formatDate</td>
+                      <td>1</td>
+                      <td>TS</td> <!-- Use item.language or default to JS --></tr>
+                  
+                    <tr>
+                      <td class="dead">❗ parseDate</td>
+                      <td>2</td>
+                      <td>TS</td> <!-- Use item.language or default to JS --></tr>
+                  
+                    <tr>
+                      <td class="dead">❗ useThis</td>
+                      <td>3</td>
+                      <td>TS</td> <!-- Use item.language or default to JS --></tr>
+                  
+                </table>
+              </details>
+            
+              <details open>
+                <summary>js/unused.js (1 item)</summary>
+                <table>
+                  <tr><th>Symbol</th><th>Line</th><th>Language</th></tr>
+                  
+                    <tr>
+                      <td class="dead">❗ unusedFunction</td>
+                      <td>2</td>
+                      <td>JS</td> <!-- Use item.language or default to JS --></tr>
+                  
+                </table>
+              </details>
+            
+          </div>
+          <div id="py-tab" class="tab-content">
+            
+              <details open>
+                <summary>src\test\python\unused.py (2 items)</summary>
+                <table>
+                  <tr><th>Symbol</th><th>Line</th><th>Language</th><th>Confidence (%)</th></tr>
+                  
+                    <tr>
+                      <td class="dead">❗ unused_function</td>
+                      <td>1</td>
+                      <td>Python</td>
+                      <td>60%</td>
+                    </tr>
+                  
+                    <tr>
+                      <td class="dead">❗ unused_function2</td>
+                      <td>4</td>
+                      <td>Python</td>
+                      <td>60%</td>
+                    </tr>
+                  
+                </table>
+              </details>
+            
+          </div>
+        
+      
+      <div class="footer">
+        Generated by Deadcode Detective v1.0.1 | 
+        <a href="https://github.com/rathi-yash/Deadcode-Detective">GitHub</a> | 
+        <a href="https://www.npmjs.com/package/deadcode-detective">npm</a> | 
+        Tue, 25 Feb 2025 23:05:31 GMT
+      </div>
+    </body>
+    </html>
+  

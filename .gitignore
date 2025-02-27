@@ -7,3 +7,4 @@ dist/*.map
 *.log
 .DS_Store
 .idea
+package-lock.json

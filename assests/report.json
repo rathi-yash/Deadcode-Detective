@@ -1,0 +1,44 @@
+{
+  "js": [
+    {
+      "file": "js/dateFormatter.ts",
+      "symbol": "formatDate",
+      "line": 1
+    },
+    {
+      "file": "js/dateFormatter.ts",
+      "symbol": "parseDate",
+      "line": 2
+    },
+    {
+      "file": "js/dateFormatter.ts",
+      "symbol": "useThis",
+      "line": 3
+    },
+    {
+      "file": "js/unused.js",
+      "symbol": "unusedFunction",
+      "line": 2
+    }
+  ],
+  "py": [
+    {
+      "file": "src\\test\\python\\unused.py",
+      "symbol": "unused_function",
+      "type": "unused function",
+      "line": 1,
+      "confidence": 60
+    },
+    {
+      "file": "src\\test\\python\\unused.py",
+      "symbol": "unused_function2",
+      "type": "unused function",
+      "line": 4,
+      "confidence": 60
+    }
+  ],
+  "summary": {
+    "totalDeadCode": 6,
+    "timestamp": "Tue, 25 Feb 2025 22:45:00 GMT"
+  }
+}
