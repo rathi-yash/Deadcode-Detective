@@ -69,7 +69,7 @@ deadcode-detective detect --js ./src/test --py ./src/test/python --format json -
 ### HTML Report Preview
 The HTML report offers a visually appealing, interactive view with tabs for different languages and collapsible sections for files. Here’s a sample:
 
-![image](assests/html_report.png) ![image](assests/html_report_python.png)
+![image](assests/html_report_json.png) ![image](assests/html_report_python.png)
 
 
 Click [here](report.html) to view the HTML report.
