@@ -14,7 +14,7 @@ Deadcode Detective is a sleek CLI tool that sniffs out unused code—those forgo
 Dead code is a silent killer—slowing reviews, bloating builds, and hiding bugs. I’ve been there, untangling large codebases where cleanup was a nightmare. Deadcode Detective fixes that:
 - **Multi-Language**: Targets JavaScript, TypeScript, and Python in one tool.
 - **Fast & Unified**: Scans in seconds, blending `ts-prune` and `vulture` into a single, polished CLI.
-- **Pretty Reports**: Color-coded output that’s easy to read and act on. (Coming Soon)
+- **Pretty Reports**: Color-coded output that’s easy to read and act on.
 - **Actionable**: Pinpoints files, lines, and symbols to zap.
 
 
