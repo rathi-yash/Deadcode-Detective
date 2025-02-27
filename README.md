@@ -72,7 +72,7 @@ The HTML report offers a visually appealing, interactive view with tabs for diff
 ![image](assests/html_report_json.png) ![image](assests/html_report_python.png)
 
 
-Click [here](report.html) to view the HTML report.
+Click [here](assests/report.html) to view the HTML report.
 
 ### JSON Report Preview
 The JSON report provides a structured, machine-readable format for automation or CI/CD integration. Here’s an excerpt:
@@ -100,7 +100,7 @@ The JSON report provides a structured, machine-readable format for automation or
     }
 }
 ```
-Click [here](report.json) to view the JSON report.
+Click [here](assests/report.json) to view the JSON report.
 
 ### CLI
 Below is the CLI structure which gets printed if no format is selected.
