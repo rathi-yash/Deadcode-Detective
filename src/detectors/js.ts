@@ -3,7 +3,7 @@ import { resolve } from 'path';
 import { existsSync } from 'fs';
 import { DeadCodeItem } from '../types.js';
 
-export async function detectJS(path: string): Promise<DeadCodeItem[]> {
+export async function detectJS(path: string, _ignorePatterns: string[]): Promise<DeadCodeItem[]> {
   console.log('Make sure `ts-prune` is installed (`npm install -g ts-prune`)');
   try {
     const tsConfigPath = './tsconfig.json';
