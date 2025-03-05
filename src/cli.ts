@@ -26,21 +26,34 @@ program
   .option('--confidence <number>', 'Confidence threshold for Python dead code detection (0-100, default: 60)', '60')
   .option('--format <type>', 'Output format (cli, html, json, default: cli)', 'cli')
   .option('--output <file>', 'Output file path (for html/json, defaults to console for json, file for html)')
-  .option('--ignore <patterns>', 'Comma-separated paths/patterns to ignore (e.g., "**/test/**,node_modules/**")')
+  .option('--ignore <patterns>', 'Comma-separated paths/patterns to ignore, must use single quotes and ** (e.g., \'**/test/**,**/node_modules/**\')')
   .action(async (options) => {
     const spinner = ora('Scanning for dead code...').start();
     const results: { js?: DeadCodeItem[]; py?: DeadCodeItem[] } = {};
 
-    const rawPatterns = options.ignore ? options.ignore.split(',') : [];
-    console.log(`Raw ignore patterns: ${rawPatterns}`);
-    const hasExpansion = rawPatterns.some((p: string) => p.includes('C:') || p.match(/[A-Za-z]:/));
-    let ignorePatterns = rawPatterns
-      .map((p: string) => p.trim())
-      .filter((p: string) => !p.includes('C:') && !p.match(/[A-Za-z]:/));
-    console.log(`Filtered ignore patterns: ${ignorePatterns}`);
-    if (hasExpansion) {
-      console.warn(chalk.yellow('Warning: Shell expansion detected in ignore patterns. Ignoring them—use single quotes (e.g., \'**/test/**\') or check shell settings.'));
-      ignorePatterns = []; // No defaults, just skip bad patterns
+    let ignorePatterns: string[] = [];
+    if (options.ignore) {
+      const rawPatterns = options.ignore.split(',');
+      console.log(`Raw ignore patterns: ${rawPatterns}`);
+
+      // Check for ** in every pattern
+      const missingWildcard = rawPatterns.some((p: string) => !p.includes('**'));
+      if (missingWildcard) {
+        spinner.fail('Invalid --ignore argument');
+        console.error(chalk.red('Error: All ignore patterns must contain "**" (e.g., \'**/test/**,**/node_modules/**\').'));
+        process.exit(1);
+      }
+
+      // Check for shell expansion
+      const hasExpansion = rawPatterns.some((p: string) => p.includes('C:') || p.match(/[A-Za-z]:/));
+      if (hasExpansion) {
+        spinner.fail('Invalid --ignore argument');
+        console.error(chalk.red('Error: Shell expansion detected. Use single quotes (e.g., \'**/test/**,**/node_modules/**\') and check shell settings (e.g., bypass winpty alias in MINGW64).'));
+        process.exit(1);
+      }
+
+      ignorePatterns = rawPatterns.map((p: string) => p.trim());
+      console.log(`Filtered ignore patterns: ${ignorePatterns}`);
     }
 
     try {
