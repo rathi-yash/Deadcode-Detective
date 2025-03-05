@@ -4,7 +4,7 @@ import { generateJsonOutput } from './output/json.js';
 import { DeadCodeItem } from './types.js';
 
 function printCliResults(results: { js?: DeadCodeItem[]; py?: DeadCodeItem[] }) {
-  console.log(chalk.bold('\n🔎 Dead Code Report:'));
+  console.log(chalk.bold('\n\u{1F50E} Dead Code Report:')); // 🔎 as Unicode escape
 
   if (results.js?.length) {
     console.log(chalk.red(`\n❗ Found ${results.js.length} unused item${results.js.length > 1 ? 's' : ''} in JavaScript/TypeScript:`));
