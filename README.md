@@ -52,6 +52,7 @@ deadcode-detective detect --py ./src/test/python --confidence 70
 - `--confidence <number>`: Confidence threshold for Python dead code detection (0-100, default: 60). Throws an error if above 100 or below 0.
 - `--format <type>`: Output format (cli, html, json, default: cli). Use html for web reports, json for machine-readable output, or cli for terminal output.
 - `--output <file>`: Output file path (for html or json, defaults to console for json, file 'deadcode-report.<format>' for html).
+- `--ignore <patterns>`: Comma-separated paths/patterns to ignore, **must** use single quotes and `**` wildcards (e.g., `'**/test/**,**/node_modules/**'`). Missing `**` or shell expansion (e.g., `C:/` in MINGW64) will fail the scan. In CMD, double quotes work (e.g., `"**/test/**"`). In MINGW64 (Git Bash), if expansion occurs, bypass the `node='winpty node.exe'` alias by running directly with the Node executable from its install location (e.g., `"C:\Path\To\Your\Nodejs\node.exe" dist/cli.js ..."`—replace with your Node.js path).
 
 ## Advance Usage with Formats
 
@@ -63,6 +64,13 @@ deadcode-detective detect --js ./src/test --py ./src/test/python --format html -
 # JSON report (machine-readable)
 deadcode-detective detect --js ./src/test --py ./src/test/python --format json --output report.json
 ```
+
+## Usage Tip
+
+### Running in MINGW64
+If `--ignore` patterns expand (e.g., `'**/test/**'` becomes `**C:/...`), the `node='winpty node.exe'` alias may interfere. Run directly with the Node executable:
+- Find your Node.js install path (e.g., `C:\Program Files\nodejs\` or wherever you installed it).
+- Use: `"C:\Path\To\Your\Nodejs\node.exe" dist/cli.js detect --py src/test/python --ignore '**/test/**,**/node_modules/**' --format cli`.
 
 ## Report Example Outputs
 
