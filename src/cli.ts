@@ -33,14 +33,16 @@ program
 
     let ignorePatterns: string[] = [];
     if (options.ignore) {
-      const rawPatterns = options.ignore.split(',');
-      console.log(`Raw ignore patterns: ${rawPatterns}`);
+      // Strip leading/trailing quotes before splitting
+      const cleanedIgnore = options.ignore.replace(/^'|'$/g, '');
+      const rawPatterns = cleanedIgnore.split(',');
+      console.log(`\nRaw ignore patterns: ${rawPatterns}`);
 
       // Check for ** in every pattern
       const missingWildcard = rawPatterns.some((p: string) => !p.includes('**'));
       if (missingWildcard) {
         spinner.fail('Invalid --ignore argument');
-        console.error(chalk.red('Error: All ignore patterns must contain "**" (e.g., \'**/test/**,**/node_modules/**\').'));
+        console.error(chalk.red('Error: All ignore patterns must contain "**" (e.g., \'**/test/**,**/node_modules**\').'));
         process.exit(1);
       }
 
@@ -48,7 +50,7 @@ program
       const hasExpansion = rawPatterns.some((p: string) => p.includes('C:') || p.match(/[A-Za-z]:/));
       if (hasExpansion) {
         spinner.fail('Invalid --ignore argument');
-        console.error(chalk.red('Error: Shell expansion detected. Use single quotes (e.g., \'**/test/**,**/node_modules/**\') and check shell settings (e.g., bypass winpty alias in MINGW64).'));
+        console.error(chalk.red('Error: Shell expansion detected. Use single quotes (e.g., \'**/test/**,**/node_modules**\') and check shell settings (e.g., bypass winpty alias in MINGW64).'));
         process.exit(1);
       }
 
@@ -63,14 +65,13 @@ program
       }
       if (options.py) {
         spinner.text = 'Scanning Python files...';
-        const confidence = parseInt(options.confidence, 10);
-        results.py = await detectPython(options.py, confidence, ignorePatterns);
+        const confidence = parseInt(options.confidence, 10) || 60;
+        const confidenceValue = Math.max(0, Math.min(100, confidence));
+        results.py = await detectPython(options.py, confidenceValue, ignorePatterns);
       }
-      spinner.succeed('Scan completed successfully');
-
       const format = options.format.toLowerCase() as 'cli' | 'html' | 'json';
       const outputPath = options.output;
-      await generateOutput(results, format, outputPath);
+      await generateOutput(results, format, outputPath, spinner);
     } catch (error) {
       spinner.fail('Scan failed');
       console.error(chalk.red(error instanceof Error ? error.message : String(error)));

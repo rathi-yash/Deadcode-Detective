@@ -1,10 +1,11 @@
 import chalk from 'chalk';
+import { Ora } from 'ora';
 import { generateHtmlOutput } from './output/html.js';
 import { generateJsonOutput } from './output/json.js';
 import { DeadCodeItem } from './types.js';
 
 function printCliResults(results: { js?: DeadCodeItem[]; py?: DeadCodeItem[] }) {
-  console.log(chalk.bold('\n\u{1F50E} Dead Code Report:')); // 🔎 as Unicode escape
+  console.log(chalk.bold('\n\u{1F50E} Dead Code Report:'));
 
   if (results.js?.length) {
     console.log(chalk.red(`\n❗ Found ${results.js.length} unused item${results.js.length > 1 ? 's' : ''} in JavaScript/TypeScript:`));
@@ -35,27 +36,36 @@ export function groupAndSortByFile(items: DeadCodeItem[]): { [file: string]: Dea
     grouped[item.file] = grouped[item.file] || [];
     grouped[item.file].push(item);
   });
-  // Sort files alphabetically and items within each file by line number
   for (const file in grouped) {
     grouped[file].sort((a, b) => a.line - b.line);
   }
   return grouped;
 }
 
-export async function generateOutput(results: { js?: DeadCodeItem[]; py?: DeadCodeItem[] }, format: 'cli' | 'html' | 'json', outputPath?: string) {
+export async function generateOutput(
+  results: { js?: DeadCodeItem[]; py?: DeadCodeItem[] },
+  format: 'cli' | 'html' | 'json',
+  outputPath?: string,
+  spinner?: Ora
+) {
   switch (format) {
     case 'cli':
+      if (spinner) spinner.succeed('Scan completed successfully');
       printCliResults(results);
       break;
 
     case 'html':
+      if (spinner) spinner.succeed('Scan completed successfully');
       await generateHtmlOutput(results, outputPath);
       break;
 
     case 'json':
+      if (spinner) spinner.succeed('Scan completed successfully');
       await generateJsonOutput(results, outputPath);
       break;
+
     default:
+      if (spinner) spinner.fail('Invalid format');
       throw new Error('Invalid Format');
   }
 }
